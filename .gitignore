@@ -1,0 +1,7 @@
+# Ignore the frontend heavy libraries
+frontend/node_modules/
+
+# Ignore the backend virtual environment and database
+backend/venv/
+backend/tasks.db
+backend/__pycache__/
