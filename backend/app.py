@@ -99,6 +99,24 @@ def update_task(task_id):
     
     return jsonify({"message": "Task updated successfully"}), 200
 
+# Protocol 2: The Blueprint (Create the table if it doesn't exist)
+def init_db():
+    with app.app_context():
+        db = get_db()
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                completed BOOLEAN NOT NULL CHECK (completed IN (0, 1))
+            )
+        ''')
+        db.commit()
+
+init_db() # <--- ADD THIS LINE HERE! Now Gunicorn will trigger it.
+
+# --- API ROUTES ---
+# (Keep all your routes the same down here)
+
 if __name__ == '__main__':
-    init_db() # Run the blueprint before the server starts
+    # Remove init_db() from down here, leave only app.run
     app.run(debug=True)
