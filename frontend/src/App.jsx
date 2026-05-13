@@ -6,7 +6,7 @@ function App() {
 
   // READ
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/tasks')
+    fetch('https://my-task-backend-ytwd.onrender.com/tasks')
       .then(response => response.json())
       .then(data => setTasks(data))
   }, [])
@@ -16,7 +16,7 @@ function App() {
     e.preventDefault()
     if (!newTaskTitle) return;
 
-    fetch('http://127.0.0.1:5000/tasks', {
+    fetch('https://my-task-backend-ytwd.onrender.com/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: newTaskTitle })
@@ -30,7 +30,7 @@ function App() {
 
   // DELETE
   const deleteTask = (id) => {
-    fetch(`http://127.0.0.1:5000/tasks/${id}`, { method: 'DELETE' })
+    fetch(`https://my-task-backend-ytwd.onrender.com/tasks/${id}`, { method: 'DELETE' })
     .then(() => setTasks(tasks.filter(task => task.id !== id)))
   }
 
@@ -40,7 +40,7 @@ function App() {
     const updatedStatus = !task.completed
 
     // 2. Send the PUT request with the new status
-    fetch(`http://127.0.0.1:5000/tasks/${task.id}`, {
+    fetch(`https://my-task-backend-ytwd.onrender.com/tasks/${task.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: updatedStatus })
